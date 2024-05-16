@@ -1,4 +1,5 @@
 import 'package:flutter/material.dart';
+import 'package:google_fonts/google_fonts.dart';
 
 class HomeScreen extends StatelessWidget {
   const HomeScreen(this.startQuiz, {super.key});
@@ -22,8 +23,9 @@ class HomeScreen extends StatelessWidget {
             icon: const Icon(Icons.arrow_right_alt_outlined),
             onPressed: startQuiz,
             style: OutlinedButton.styleFrom(foregroundColor: Colors.teal),
-            label: const Text(
+            label: Text(
               'Start Quiz',
+              style: GoogleFonts.poppins(fontWeight: FontWeight.w300),
             ),
           ),
         ],

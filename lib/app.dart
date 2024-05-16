@@ -1,23 +1,34 @@
 import 'package:flutter/material.dart';
 import 'package:quizapp/home_screen.dart';
 import 'package:quizapp/questions.dart';
+import 'package:quizapp/questionscreen.dart';
 
-class Quiz extends StatefulWidget {
-  const Quiz({super.key});
+class App extends StatefulWidget {
+  const App({super.key});
   @override
   State<StatefulWidget> createState() {
-    return _QuizState();
+    return _AppState();
   }
 }
 
-class _QuizState extends State<Quiz> {
+class _AppState extends State<App> {
   // Widget? activeScreen;
+  List<String> selectedAnswers = [];
   var activeScreen = 'home-screen';
   // @override
   // void initState() {
   //   activeScreen = HomeScreen(switchScreen);
   //   super.initState();
   // }
+  void selectedAnswer(String answer) {
+    selectedAnswers.add(answer);
+    if (selectedAnswers.length == questions.length) {
+      setState(() {
+        selectedAnswers = [];
+        activeScreen = 'home-screen';
+      });
+    }
+  }
 
   void switchScreen() {
     setState(
@@ -35,7 +46,7 @@ class _QuizState extends State<Quiz> {
       home: Scaffold(
         body: activeScreen == 'home-screen'
             ? HomeScreen(switchScreen)
-            : const Questions(),
+            : QuestionScreen(selectedAnswer),
       ),
     );
   }
