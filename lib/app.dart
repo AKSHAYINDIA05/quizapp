@@ -2,6 +2,7 @@ import 'package:flutter/material.dart';
 import 'package:quizapp/home_screen.dart';
 import 'package:quizapp/questions.dart';
 import 'package:quizapp/questionscreen.dart';
+import 'package:quizapp/results_screeen.dart';
 
 class App extends StatefulWidget {
   const App({super.key});
@@ -24,29 +25,41 @@ class _AppState extends State<App> {
     selectedAnswers.add(answer);
     if (selectedAnswers.length == questions.length) {
       setState(() {
-        selectedAnswers = [];
-        activeScreen = 'home-screen';
+        // selectedAnswers = [];
+        activeScreen = 'results-screen';
       });
     }
+  }
+
+  void restartQuiz() {
+    setState(() {
+      selectedAnswers = [];
+      activeScreen = 'questions-screen';
+    });
   }
 
   void switchScreen() {
     setState(
       () {
         // activeScreen = const Questions();
-        activeScreen = 'questions';
+        activeScreen = 'questions-screen';
       },
     );
   }
 
   @override
   Widget build(BuildContext context) {
+    Widget screenWidget = HomeScreen(switchScreen);
+    if (activeScreen == 'questions-screen') {
+      screenWidget = QuestionScreen(selectedAnswer);
+    }
+    if (activeScreen == 'results-screen') {
+      screenWidget = ResultsScreeen(selectedAnswers, restartQuiz);
+    }
     return MaterialApp(
       debugShowCheckedModeBanner: false,
       home: Scaffold(
-        body: activeScreen == 'home-screen'
-            ? HomeScreen(switchScreen)
-            : QuestionScreen(selectedAnswer),
+        body: screenWidget,
       ),
     );
   }
