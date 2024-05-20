@@ -1,7 +1,7 @@
 import 'package:flutter/material.dart';
 
 class QuestionIdentifier extends StatelessWidget {
-  QuestionIdentifier(this.isCorrectAnswer, this.questionIndex, {super.key});
+  const QuestionIdentifier(this.isCorrectAnswer, this.questionIndex, {super.key});
   final int questionIndex;
   final bool isCorrectAnswer;
   @override
